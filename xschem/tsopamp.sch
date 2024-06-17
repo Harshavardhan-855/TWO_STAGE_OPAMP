@@ -5,16 +5,16 @@ K {}
 V {}
 S {}
 E {}
-B 2 1370 -1250 2170 -850 {flags=graph
-y1=0
-y2=2
+B 2 2030 -710 2830 -310 {flags=graph
+y1=0.0027
+y2=1.5
 ypos1=0
 ypos2=2
 divy=5
 subdivy=1
 unity=1
-x1=0
-x2=10e-6
+x1=1e-13
+x2=8e-07
 divx=5
 subdivx=1
 xlabmag=1.0
@@ -315,7 +315,7 @@ C {devices/lab_wire.sym} 940 -530 2 1 {name=p5 sig_type=std_logic lab=VCM
 }
 C {devices/lab_wire.sym} 1420 -530 2 0 {name=p6 sig_type=std_logic lab=VCM
 }
-C {devices/code_shown.sym} 260 -860 0 0 {name=SPICE only_toplevel=false value=
+C {devices/code_shown.sym} 210 -830 0 0 {name=SPICE only_toplevel=false value=
 
 "
 .options acct list
@@ -348,13 +348,13 @@ C {devices/code_shown.sym} 260 -860 0 0 {name=SPICE only_toplevel=false value=
 
 .control
 op
-write tso_dc.raw
+write tsopamp.raw
 set appendwrite
 
-tran 0.01n 800n uic
+dc VCM 0 1.5 0.3
 
 remzerovec
-write tso_dc.raw
+write tsopamp.raw
 
 .endc
 
@@ -405,20 +405,20 @@ value="
 
 .control
 op
-write tso_dc.raw
+write tsopamp.raw
 set appendwrite
 
 tran 0.01n 800n uic
 
 remzerovec
-write tso_dc.raw
+write tsopamp.raw
 
 .endc
 
 "}
 C {devices/launcher.sym} 890 -970 0 0 {name=h15
 descr="Annotate OP" 
-tclcommand="xschem raw_read $netlist_dir/tso_dc.raw tran"
+tclcommand="xschem raw_read $netlist_dir/tsopamp.raw tran"
 value="
 
 .options acct list
@@ -451,14 +451,16 @@ value="
 
 .control
 op
-write tso_dc.raw
+write tsopamp.raw
 set appendwrite
 
 tran 0.01n 800n uic
 
 remzerovec
-write tso_dc.raw
+write tsopamp.raw
 
 .endc
 
 "}
+C {devices/ngspice_get_value.sym} 970 -550 0 0 {name=r1 node=V(@m.xm1.msky130_fd_pr__nfet_01v8[vth])
+descr="Vth="}
